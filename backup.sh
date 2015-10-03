@@ -11,4 +11,5 @@ for f in $(find -type f -iname "*.py" -or -type f -iname "*.txt"); do
 	ln -f $f $BACKUP_DIR/$f.hardlink	
 done
 
-cp -rf .git $BACKUP_DIR
+rm -rf $BACKUP_DIR/.git
+cp -r .git $BACKUP_DIR
