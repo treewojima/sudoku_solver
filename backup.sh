@@ -8,6 +8,7 @@ for d in $(find -type d); do
 done
 
 for f in $(find -type f -iname "*.py" -or -type f -iname "*.txt"); do
-	ln -f $f ../.solver.bak/$f.hardlink	
+	ln -f $f $BACKUP_DIR/$f.hardlink	
 done
 
+cp -r .git $BACKUP_DIR
