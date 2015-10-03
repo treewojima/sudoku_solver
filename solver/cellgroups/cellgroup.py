@@ -5,6 +5,15 @@ class CellGroup(object):
     def get_cells(self):
         raise NotImplementedError()
 
+    def get_unsolved_cells(self):
+        return [cell for cell in self if not cell.is_solved()]
+
+    def get_unsolved_values(self):
+        values = set()
+        for cell in self.get_unsolved_cells():
+            values.update(cell.candidates)
+        return values
+
     def is_solved(self):
         cell_values = []
         for cell in self:

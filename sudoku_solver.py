@@ -4,10 +4,12 @@ def main():
     sudoku = debug()
 
     passes = 1
-    #while not sudoku.is_solved():
-    #    if simple_solver(sudoku):
-    #        passes += 1
-    #        continue
+    while not sudoku.is_solved():
+        if simple_solver(sudoku):
+            passes += 1
+            continue
+        
+#        elif 
 
     #    raise Exception("ambiguous puzzle (" + str(passes) + " passes)")
 

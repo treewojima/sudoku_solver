@@ -41,6 +41,9 @@ class Sudoku(Grid):
                 boxes.append(self.get_box(boxcol, boxrow))
         return boxes
 
+    def get_unsolved_values(self):
+        raise NotImplementedError()
+
     def is_solved(self):
         for column in self.get_columns():
             if not column.is_solved():
