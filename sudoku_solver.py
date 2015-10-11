@@ -1,15 +1,13 @@
-import solver
+from solver import Sudoku
+from solver.solvers import simple, last_man_standing as lms, elimination as elim
 
 def main():
-    sudoku = debug()
+    sudoku = from_file("puzzles/incomplete_sudoku.txt")
 
-    passes = 1
-    while not sudoku.is_solved():
-        if simple_solver(sudoku):
-            passes += 1
-            continue
-        
-#        elif 
+#    solvers = [simple, lms, elim]
+#    while not sudoku.is_solved():
+#        for solver in solvers:
+#            if
 
     #    raise Exception("ambiguous puzzle (" + str(passes) + " passes)")
 
@@ -32,7 +30,7 @@ def from_file(filename):
     if len(lines) != 9:
         raise ParseError(filename, "mismatched number of rows in grid")
 
-    sudoku = solver.Sudoku()
+    sudoku = Sudoku()
 
     for row in range(0, 9):
         line = lines[row]

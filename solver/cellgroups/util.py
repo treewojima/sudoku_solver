@@ -1,9 +1,10 @@
 def uniques(li):
-    uniquesli = []
-    for e in li:
-        if not e in uniquesli:
-            uniquesli.append(e)
-    return uniquesli
+    return list(set(li))
+#    uniquesli = []
+#    for e in li:
+#        if not e in uniquesli:
+#            uniquesli.append(e)
+#    return uniquesli
 
 class RangeError(RuntimeError):
     def __init__(self, min, max, actual):

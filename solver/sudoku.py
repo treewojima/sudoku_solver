@@ -1,6 +1,7 @@
 from cell import Cell
 from cellgroups import Box, Column, Grid, Row
 from majorgroups import MajorColumn, MajorRow
+import cPickle
 
 class Sudoku(Grid):
     def __init__(self):
@@ -59,11 +60,20 @@ class Sudoku(Grid):
 
         return True
 
+    def save(self, filename = "savestate"):
+        f = file(filename, "wb")
+        cPickle.dump(self.internal_grid, f, 2)
+        f.close()
+
+    def load(self, filename = "savestate"):
+        f = file(filename, "rb")
+        self.internal_grid = cPickle.load(f)
+        f.close()
+
     def __str__(self):
         return "Sudoku!"
 
 def from_file(filename):
-    lines = []
     try:
         f = file(filename)
         lines = [line.strip() for line in f.readlines()]
