@@ -27,6 +27,9 @@ class CellGroup(object):
 
         return True
 
+    def __getitem__(self, index):
+        return self.get_cells()[index]
+
     def __iter__(self):
         for cell in self.get_cells():
             yield cell
