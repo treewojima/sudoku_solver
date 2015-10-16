@@ -1,9 +1,15 @@
+from abc import ABCMeta, abstractmethod
+
 class CellGroup(object):
+
+    __metaclass__ = ABCMeta
+
     def __init__(self, sudoku):
         self.sudoku = sudoku
 
+    @abstractmethod
     def get_cells(self):
-        raise NotImplementedError()
+        pass
 
     def get_unsolved_cells(self):
         return [cell for cell in self if not cell.is_solved()]
@@ -34,8 +40,9 @@ class CellGroup(object):
         for cell in self.get_cells():
             yield cell
 
+    @abstractmethod
     def __str__(self):
-        raise NotImplementedError()
+        pass
 
     def __repr__(self):
         return str(self)

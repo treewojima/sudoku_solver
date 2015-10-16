@@ -1,12 +1,17 @@
+from abc import ABCMeta, abstractmethod
 from solver.cellgroups import CellGroup
 
 class MajorGroup(CellGroup):
+
+    __metaclass__ = ABCMeta
+
     def __init__(self, sudoku, index):
         super(MajorGroup, self).__init__(sudoku)
         self.index = index
 
+    @abstractmethod
     def get_boxes(self):
-        raise NotImplementedError()
+        pass
 
     def is_solved(self):
         for box in self.get_boxes():
