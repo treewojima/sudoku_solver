@@ -19,4 +19,5 @@ def try_solve_box(box):
     
     for subrow in subrows:
         for cell in subrow.get_unsolved_cells():
-            
+           pass 
+

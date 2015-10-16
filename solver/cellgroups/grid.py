@@ -1,4 +1,4 @@
-from cellgroup import CellGroup
+from .cellgroup import CellGroup
 
 class Grid(CellGroup):
     def __init__(self, sudoku, size, cell_factory):
@@ -7,7 +7,13 @@ class Grid(CellGroup):
         self.internal_grid = [[cell_factory(column, row) for column in range(0, size)] for row in range(0, size)]
 
     def get_cell(self, column, row):
-        return self.internal_grid[row][column]
+        try:
+            return self.internal_grid[row][column]
+        except IndexError as e:
+            print("col=", column)
+            print("row=", row)
+            print("size=", self.size)
+            raise e
 
     def get_cells(self):
         cells = [] 
@@ -24,5 +30,5 @@ class Grid(CellGroup):
                 else:
                     rowstr += "-"
 
-            print rowstr
+            print(rowstr)
 

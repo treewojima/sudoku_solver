@@ -21,21 +21,21 @@ class ParseError(RuntimeError):
 def from_file(filename):
     lines = []
     try:
-        f = file(filename)
+        f = open(filename)
         lines = [line.strip() for line in f.readlines()]
         f.close()
-    except IOError, e:
-        raise ParseError(filename, "could not open file: " + str(e))
+    except IOError as e:
+        raise ParseError(filename, "could not open file: " + str(e)).with_traceback()
 
     if len(lines) != 9:
-        raise ParseError(filename, "mismatched number of rows in grid")
+        raise ParseError(filename, "mismatched number of rows in grid").with_traceback()
 
     sudoku = Sudoku()
 
     for row in range(0, 9):
         line = lines[row]
         if len(line) != 9:
-            raise ParseError(filename, "mismatched number of cells in row \"" + str(row) + "\"")
+            raise ParseError(filename, "mismatched number of cells in row \"" + str(row) + "\"").with_traceback()
 
         for col in range(0, 9):
             value = line[col]
@@ -45,11 +45,11 @@ def from_file(filename):
 
             try:
                 sudoku.get_cell(col, row).set_value(int(value))
-            except IndexError, e:
-                print "col=" + str(col)
-                print "row=" + str(row)
-                print "line=" + line
-                print "value=" + str(value)
+            except IndexError as e:
+                print("col=", str(col))
+                print("row=", str(row))
+                print("line=", line)
+                print("value=", str(value))
                 raise e
 
     return sudoku

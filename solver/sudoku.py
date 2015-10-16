@@ -1,7 +1,7 @@
-from cell import Cell
-from cellgroups import Box, Column, Grid, Row
-from majorgroups import MajorColumn, MajorRow
-import cPickle
+from .cell import Cell
+from .cellgroups import Box, Column, Grid, Row
+from .majorgroups import MajorColumn, MajorRow
+import pickle
 
 class Sudoku(Grid):
     def __init__(self):
@@ -37,8 +37,8 @@ class Sudoku(Grid):
 
     def get_boxes(self):
         boxes = []
-        for boxrow in xrange(0, 3):
-            for boxcol in xrange(0, 3):
+        for boxrow in range(0, 3):
+            for boxcol in range(0, 3):
                 boxes.append(self.get_box(boxcol, boxrow))
         return boxes
 
@@ -61,50 +61,15 @@ class Sudoku(Grid):
         return True
 
     def save(self, filename = "savestate"):
-        f = file(filename, "wb")
-        cPickle.dump(self.internal_grid, f, 2)
+        f = open(filename, "wb")
+        pickle.dump(self.internal_grid, f, 2)
         f.close()
 
     def load(self, filename = "savestate"):
-        f = file(filename, "rb")
-        self.internal_grid = cPickle.load(f)
+        f = open(filename, "rb")
+        self.internal_grid = pickle.load(f)
         f.close()
 
     def __str__(self):
         return "Sudoku!"
 
-def from_file(filename):
-    try:
-        f = file(filename)
-        lines = [line.strip() for line in f.readlines()]
-        f.close()
-    except IOError, e:
-        raise ParseError(filename, "could not open file: " + str(e))
-
-    if len(lines) != 9:
-        raise ParseError(filename, "mismatched number of rows in grid")
-
-    grid = Grid()
-
-    for row in range(0, 9):
-        line = lines[row]
-        if len(line) != 9:
-            raise ParseError(filename, "mismatched number of cells in row \"" + str(row) + "\"")
-
-        for col in range(0, 9):
-            value = line[col]
-            if value == "-":
-                # The default value of cells in the grid is already range(1, 10)
-                continue
-
-            try:
-                grid.get_cell(col, row).set_value(int(value))
-            except IndexError, e:
-                print "col=" + str(col)
-                print "row=" + str(row)
-                print "line=" + line
-                print "value=" + str(value)
-                raise e
-
-    return grid
-        

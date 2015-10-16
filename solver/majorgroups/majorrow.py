@@ -1,4 +1,4 @@
-from majorgroup import MajorGroup
+from .majorgroup import MajorGroup
 
 class MajorRow(MajorGroup):
     def get_cells(self):

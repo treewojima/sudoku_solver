@@ -1,4 +1,4 @@
-from subgroup import SubGroup
+from .subgroup import SubGroup
 
 class SubRow(SubGroup):
     def get_cells(self):
