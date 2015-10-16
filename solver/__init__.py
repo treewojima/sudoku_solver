@@ -1,4 +1,4 @@
-from sudoku import Sudoku
+from .sudoku import Sudoku
 
 def debug():
     return Sudoku()

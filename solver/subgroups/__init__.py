@@ -1,3 +1,3 @@
-from subrow import SubRow
-from subcolumn import SubColumn
+from .subrow import SubRow
+from .subcolumn import SubColumn
 

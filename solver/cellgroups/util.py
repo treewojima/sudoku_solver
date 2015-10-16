@@ -19,5 +19,5 @@ class AmbiguousPuzzleException(Exception):
         super(AmbiguousPuzzleException, self).__init__("ambiguous puzzle (" + str(passes) + " passes)")
 
 if __name__ == "__main__":
-    print "error: this is not a standalone script; run \"./solver\" instead"
+    print("error: this is not a standalone script; run \"./solver\" instead")
 

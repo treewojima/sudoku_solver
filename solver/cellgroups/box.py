@@ -1,4 +1,4 @@
-from grid import Grid
+from .grid import Grid
 
 class Box(Grid):
     def __init__(self, sudoku, boxcol, boxrow):

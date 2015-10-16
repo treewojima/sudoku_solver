@@ -25,12 +25,12 @@ class Cell(object):
             self.candidates = set([n])
             
         else:
-            raise TypeError("expecting argument of type 'set', 'list' or 'int'")    
+            raise TypeError("expecting argument of type 'set', 'list' or 'int'").with_traceback()
 
     def get_value(self):
         # This exception is for debug purposes only
         if not self.is_solved():
-            raise Exception("cell " + str(self) + " has multiple candidate values")
+            raise Exception("cell " + str(self) + " has multiple candidate values").with_traceback()
 
         return self.candidates.copy().pop()
 
@@ -38,7 +38,7 @@ class Cell(object):
         if isinstance(values, list):
             values = set(values)
         elif not isinstance(values, set):
-            raise TypeError("expected argument of type 'set' or 'list'")
+            raise TypeError("expected argument of type 'set' or 'list'").with_traceback()
 
         new_candidates = self.candidates.difference(values)
         if self.candidates != new_candidates:
@@ -60,8 +60,8 @@ class Cell(object):
         return self.get_row().get_major_row()
 
     def get_box(self):
-        boxcol = self.col / 3
-        boxrow = self.row / 3
+        boxcol = self.col // 3
+        boxrow = self.row // 3
         return self.sudoku.get_box(boxcol, boxrow) 
 
     def is_solved(self):
@@ -82,12 +82,12 @@ def validate_set(s):
 def validate_list(li):
     s = set(li)
     if len(li) != len(s):
-        raise util.DuplicateValuesError()
+        raise util.DuplicateValuesError().with_traceback()
 
     return validate_set(s)
 
 def validate_num(n):
     if n < 1 or n > 9:
-        raise util.RangeError(1, 9, n)
+        raise util.RangeError(1, 9, n).with_traceback()
     return True
 
